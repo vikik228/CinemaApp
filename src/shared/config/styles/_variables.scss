@@ -1,0 +1,31 @@
+$font-main: 'Manrope', sans-serif;
+
+$color-bg-main: #0b0e14;
+$color-bg-card: #151922;
+$color-border: #222938;
+
+$color-text-primary: #ffffff; //text
+$color-text-secondary: #707e94;
+
+$color-accent: #2563eb; //focus
+$color-accent-hover: #1d4ed8;
+$color-accent-glow: #3b82f6;
+
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1200px;
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile}) { @content; }
+}
+
+@mixin mobile-landscape {
+  @media (orientation: landscape) and (max-width: 920px) { @content; }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-tablet}) { @content; }
+}
+@mixin desktop {
+  @media (max-width: #{$breakpoint-desktop}) { @content; }
+}
