@@ -1,0 +1,68 @@
+@import '@/shared/config/styles/variables';
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  transition: ease-in-out 0.2s;
+  .mainCard {
+    background-color: $color-bg-card;
+    width: 1200px;
+    min-height: 830px;
+    max-height: 100%;
+    border-radius: 20px;
+  }
+}
+
+.eventContainer {
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  padding: 10px;
+  gap: 10px;
+
+  .eventContent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+
+    border-bottom: 1px solid $color-border;
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+  }
+
+  .eventTitle {
+    font-style: $font-main;
+    color: $color-text-primary;
+    font-size: 30px;
+    font-weight: bold;
+    align-self: center;
+  }
+  .eventImg {
+    border-radius: 30px;
+    width: 250px;
+    height: 200px;
+
+  }
+  .eventInf {
+    font-style: $font-main;
+    color: $color-text-secondary;
+    font-size: 20px;
+    align-self: center;
+
+  }
+  &:hover {
+    transform: scale(1.003);
+
+  }
+}
+
+li {
+  overflow: hidden;
+}
+

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { MainPage } from "@/pages/main-page";
-import {EventsPage} from "@/pages/events-page";
+import { EventsPage } from "@/pages/events-page";
 
 const router = createBrowserRouter(
     [
