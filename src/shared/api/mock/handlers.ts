@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { STORAGE_KEYS } from '../../config/storage';
 import {mockHall, mockMovie, mockSeance} from "./data";
+import type { User } from "./types";
 
 export const handlers = [
 
@@ -30,12 +31,44 @@ export const handlers = [
         return HttpResponse.json(movie);
     }),
     http.post('/register', async ({ request }) => {
-        const newUser = await request.json();
+        const newUser = await request.json() as Omit<User, 'id'>;
         const rawData = localStorage.getItem(STORAGE_KEYS.USERS_DB);
-        const users = rawData ? JSON.parse(rawData) : [];
-        users.push(newUser);
+        const users: User[] = rawData ? JSON.parse(rawData) : [];
+
+        const isEmailTaken = users.some((user) =>
+            user.email?.toLowerCase() === newUser.email?.toLowerCase());
+        const isLoginTaken = users.some((user) =>
+            user.login?.toLowerCase() === newUser.login?.toLowerCase());
+
+        if (isEmailTaken) {
+            return new HttpResponse(
+                JSON.stringify({ message: "Пользователь с такой почтой уже существует!" }),
+                { status: 400 },
+            );
+        }
+        if (isLoginTaken) {
+            return new HttpResponse(
+                JSON.stringify({ message: "Пользователь с таким логином уже сущесвтует"}),
+                { status: 400 },
+            );
+        }
+        const userToSave: User = {
+            id: Date.now(),
+            ...newUser,
+        };
+
+        users.push(userToSave);
         localStorage.setItem(STORAGE_KEYS.USERS_DB, JSON.stringify(users));
-        return HttpResponse.json({success: true, message: "Успешная регистрация"});
+
+        return HttpResponse.json({
+            success: true,
+            message: "Успешная регистрация",
+            user: {
+                id: userToSave.id,
+                login: userToSave.login,
+                email: userToSave.email,
+            }
+        }, { status: 201});
 
 }),
     http.post('/cart', async ({ request }) => {
@@ -47,14 +80,14 @@ export const handlers = [
         return HttpResponse.json({success: true, message: "Успешное добавление в корзину"});
     }),
     http.post('/login', async ({ request }) => {
-        const { email, password } = await request.json() as {email: string, password: string};
+        const { email, password } = await request.json() as Pick<User, 'email' | 'password'>;
         const rawData = localStorage.getItem(STORAGE_KEYS.USERS_DB);
-        const users = rawData ? JSON.parse(rawData) : [];
-        const foundUser = users.find((user: any) => user.email === email && user.password === password);
+        const users: User[] = rawData ? JSON.parse(rawData) : [];
+        const foundUser = users.find((user) => user.email === email && user.password === password);
         if (!foundUser) {
             return new HttpResponse(
-                JSON.stringify({message: "Неверный логин или пароль"}),
-                {status: 400},
+                JSON.stringify({ message: "Неверный логин или пароль!" }),
+                { status: 400 },
             );
         }
         const Token = `Token ${foundUser.email}`;
@@ -64,11 +97,11 @@ export const handlers = [
             success: true,
             token: Token,
             user: {
-                login: foundUser.login || `Пользователь${Date.now()}`,
+                id: foundUser.id,
+                login: foundUser.login,
                 email: foundUser.email,
             }
         })
-
 
     })
 ];

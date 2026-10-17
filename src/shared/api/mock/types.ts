@@ -20,3 +20,10 @@ export interface SeanceMockData {
     time: string;
     price: number;
 }
+
+export interface User {
+    id: number;
+    login: string;
+    email: string;
+    password: string;
+}
