@@ -71,7 +71,7 @@
 
     transition: ease-in 0.2s;
     &:hover {
-      transform: scale(103%);
+
     }
   }
 
@@ -95,4 +95,33 @@
     transform: scale(1.05);
     filter: drop-shadow(0px 0px 5px $color-accent-glow);
   }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoutButton {
+  border-radius: 10px;
+  background-color: $color-text-secondary;
+  border-color: $color-border;
+  height: 40px;
+  width: 100px;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  &:hover {
+    transform: scale(1.03);
+    background-color: $color-accent-glow;
+  }
+}
+
+.username {
+  align-items: center;
+  padding-right: 30px;
+  justify-content: center;
+  font-style: $font-main;
+  font-size: 30px;
 }

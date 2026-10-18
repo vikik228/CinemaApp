@@ -1,0 +1,27 @@
+@import '@/shared/config/styles/variables';
+
+.mainStyle {
+  background-color: $color-bg-main;
+  min-height: 100vh;
+}
+
+
+.cardMain {
+  background-color: $color-bg-card;
+  height: 600px;
+  width: 700px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba($color-accent-glow, 0.6);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginLink {
+  font-size: 20px;
+  font-style: $font-main;
+  color: $color-text-secondary;
+  text-decoration: none;
+}

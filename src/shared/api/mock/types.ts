@@ -21,7 +21,7 @@ export interface SeanceMockData {
     price: number;
 }
 
-export interface User {
+export interface MockUser {
     id: number;
     login: string;
     email: string;

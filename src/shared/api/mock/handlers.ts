@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { STORAGE_KEYS } from '../../config/storage';
 import {mockHall, mockMovie, mockSeance} from "./data";
-import type { User } from "./types";
+import type { MockUser } from "./types";
 
 export const handlers = [
 
@@ -31,9 +31,9 @@ export const handlers = [
         return HttpResponse.json(movie);
     }),
     http.post('/register', async ({ request }) => {
-        const newUser = await request.json() as Omit<User, 'id'>;
+        const newUser = await request.json() as Omit<MockUser, 'id'>;
         const rawData = localStorage.getItem(STORAGE_KEYS.USERS_DB);
-        const users: User[] = rawData ? JSON.parse(rawData) : [];
+        const users: MockUser[] = rawData ? JSON.parse(rawData) : [];
 
         const isEmailTaken = users.some((user) =>
             user.email?.toLowerCase() === newUser.email?.toLowerCase());
@@ -52,7 +52,7 @@ export const handlers = [
                 { status: 400 },
             );
         }
-        const userToSave: User = {
+        const userToSave: MockUser = {
             id: Date.now(),
             ...newUser,
         };
@@ -80,9 +80,9 @@ export const handlers = [
         return HttpResponse.json({success: true, message: "Успешное добавление в корзину"});
     }),
     http.post('/login', async ({ request }) => {
-        const { email, password } = await request.json() as Pick<User, 'email' | 'password'>;
+        const { email, password } = await request.json() as Pick<MockUser, 'email' | 'password'>;
         const rawData = localStorage.getItem(STORAGE_KEYS.USERS_DB);
-        const users: User[] = rawData ? JSON.parse(rawData) : [];
+        const users: MockUser[] = rawData ? JSON.parse(rawData) : [];
         const foundUser = users.find((user) => user.email === email && user.password === password);
         if (!foundUser) {
             return new HttpResponse(

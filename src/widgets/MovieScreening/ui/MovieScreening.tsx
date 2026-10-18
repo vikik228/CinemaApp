@@ -3,9 +3,8 @@ import { useSeanceStore } from "@/entities/Seance";
 import { useHallStore } from "@/entities/Hall";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import styles from './MovieScreening.module.scss';
 import type {SeanceMockData} from "@/shared/api/mock/types.ts";
-
+import styles from './MovieScreening.module.scss';
 
 
 export function MovieScreening( { movies } : MovieScreeningProps ) {
@@ -92,7 +91,10 @@ export function MovieScreening( { movies } : MovieScreeningProps ) {
                                             >
                                                 {seance.time}
                                                 <br />
-                                                {seance.price}
+                                                {seance.price} руб
+
+
+
                                             </button>
                                         ))}
                                     </div>
