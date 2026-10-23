@@ -7,20 +7,25 @@ import './styles/index.scss';
 
 async function enableMocking() {
     // if (import.meta.env.MODE !== 'development') return
-    const { worker } = await import('../shared/api/mock/browser')
+    const { worker } = await import('@/shared/api/mock')
     return worker.start({
         onUnhandledFrame: 'bypass',
         serviceWorker: {
-            url: 'mockServiceWorker.js',
+            url: '/mockServiceWorker.js',
         }
     });
 }
-enableMocking().then(() => {
-    createRoot(document.getElementById('root')!).render(
-        <StrictMode>
-            <App />
-        </StrictMode>,
-    )
-})
+
+enableMocking()
+    .catch((error) => {
+        console.error('Не удалось запустить MSW', error)
+    })
+    .finally(() => {
+        createRoot(document.getElementById('root')!).render(
+            <StrictMode>
+                <App />
+            </StrictMode>,
+        )
+    })
 
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { message } from "antd";
-import { registerUser } from "@/features/register/api/registerUser.ts";
-import type { RegisterFormValues } from "@/features/register/model/types.ts";
+import { registerUser } from "../api/registerUser";
+import type { RegisterFormValues } from "./types";
 
 export function useRegister(onSuccess?: () => void) {
     const [messageApi, contextHolder] = message.useMessage();

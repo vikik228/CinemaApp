@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { STORAGE_KEYS } from '../../config/storage';
+import { STORAGE_KEYS } from '@/shared/config';
 import {mockHall, mockMovie, mockSeance} from "./data";
 import type { MockUser } from "./types";
 
@@ -13,11 +13,39 @@ export const handlers = [
         return HttpResponse.json(mockSeance);
     }),
 
+    http.get('/api/seances/:id/seats', ({ params }) => {
+        const seanceId = Number(params.id);
+        const raw = localStorage.getItem(STORAGE_KEYS.OCCUPIED_SEATS);
+        const occupied: Record<string, number[]> = raw ? JSON.parse(raw) : {};
+        return HttpResponse.json({ occupied: occupied[seanceId] ?? [] });
+    }),
+
+    http.post('/api/seances/:id/seats', async ({ params, request }) => {
+        const seanceId = Number(params.id);
+        const { seat } = await request.json() as { seat: number };
+        const raw = localStorage.getItem(STORAGE_KEYS.OCCUPIED_SEATS);
+        const occupied: Record<string, number[]> = raw ? JSON.parse(raw) : {};
+        const seatsForSeance = occupied[seanceId] ?? [];
+
+        if (seatsForSeance.includes(seat)) {
+            return new HttpResponse(
+                JSON.stringify({ message: "Место уже занято" }),
+                { status: 409 },
+            );
+        }
+
+        seatsForSeance.push(seat);
+        occupied[seanceId] = seatsForSeance;
+        localStorage.setItem(STORAGE_KEYS.OCCUPIED_SEATS, JSON.stringify(occupied));
+
+        return HttpResponse.json({ success: true, seat }, { status: 201 });
+    }),
+
     http.get('/api/movies', () => {
        return HttpResponse.json(mockMovie);
     }),
 
-    http.get('/movie/:id', ({ params }) => {
+    http.get('/api/movie/:id', ({ params }) => {
         const { id } = params;
 
         const movie = mockMovie.find((item) => item.id === Number(id));

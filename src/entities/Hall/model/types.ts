@@ -1,4 +1,4 @@
-import type { HallMockData } from "@/shared/api/mock/types";
+import type { HallMockData } from "@/shared/api";
 
 export interface HallStore {
     halls: HallMockData[];

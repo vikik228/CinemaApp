@@ -1,5 +1,4 @@
-import type { RegisterFormValues} from "@/features/register/model/types";
-import type { RegisterResult } from "@/features/register/model/types";
+import type { RegisterFormValues, RegisterResult } from "../model/types";
 
 export async function registerUser(values: RegisterFormValues): Promise<RegisterResult> {
     try {

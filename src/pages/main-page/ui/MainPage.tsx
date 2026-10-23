@@ -1,10 +1,9 @@
 import { Navbar } from '@/widgets/Navbar';
 import { useMovieStore } from "@/entities/Movie";
-import styles from './MainPage.module.scss';
-import { MovieCarousel } from "@/widgets/MovieCarousel/ui/MovieCarousel.tsx";
+import { MovieCarousel } from "@/widgets/MovieCarousel";
 import { useEffect } from "react";
-import { MovieScreening } from "@/widgets/MovieScreening/ui/MovieScreening.tsx";
-
+import { MovieScreening } from "@/widgets/MovieScreening";
+import styles from './MainPage.module.scss';
 
 export function MainPage() {
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { message } from "antd";
-import { loginUser } from "@/features/login/api/loginUser";
-import type { LoginFormValues } from "@/features/login/model/types";
+import { loginUser } from "../api/loginUser";
+import type { LoginFormValues } from "./types";
 import {useAuthStore} from "@/entities/User";
 
 export function useLogin(onSuccess?: () => void) {

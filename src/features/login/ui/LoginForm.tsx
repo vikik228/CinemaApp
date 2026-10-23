@@ -1,6 +1,6 @@
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { useLogin } from "@/features/login/model/useLogin.ts";
+import { useLogin } from "../model/useLogin";
 import {useNavigate} from "react-router";
 import styles from './LoginForm.module.scss';
 

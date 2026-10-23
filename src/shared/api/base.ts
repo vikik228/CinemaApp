@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { STORAGE_KEYS } from "../config/storage";
+import { STORAGE_KEYS } from "@/shared/config";
 
 export const apiInstance = axios.create({
     baseURL: '/',

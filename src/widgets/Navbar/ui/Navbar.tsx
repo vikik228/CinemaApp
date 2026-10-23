@@ -14,7 +14,7 @@ export function Navbar() {
             <ul className={styles.navbarItem}>
 
                 <li><a href="/">Главная</a></li>
-                <li><a href="">Каталог</a></li>
+                <li><a href="/catalog">Каталог</a></li>
                 <li><a href="/events">События</a></li>
                 <li>{isAuth ? (
                     <>

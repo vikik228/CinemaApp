@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { HallMockData } from "@/shared/api/mock/types";
+import type { HallMockData } from "@/shared/api";
 import type { HallStore } from "./types";
 
 

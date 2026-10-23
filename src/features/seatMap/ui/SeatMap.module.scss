@@ -1,0 +1,60 @@
+@import '@/shared/config/styles/variables';
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: $color-bg-main;
+  min-height: 100vh;
+
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.mainCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  background-color: $color-bg-card;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 1410px;
+  width: 100%;
+}
+
+.seatButton {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 60px;
+  background-color: #7878ff;
+  border: none;
+  border-radius: 10px;
+  font-family: $font-main;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.occupiedSeat {
+  background-color: #6b6b6b;
+  color: #c4c4c4;
+  cursor: not-allowed;
+  &:hover {
+    transform: none;
+  }
+}
+

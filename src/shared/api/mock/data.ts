@@ -1,4 +1,4 @@
-import type { MovieMockData, SeanceMockData, HallMockData } from "./types";
+import type { MovieMockData, SeanceMockData, HallMockData } from "../types";
 
 export const mockMovie: MovieMockData[] = [
     {

@@ -1,0 +1,68 @@
+@import '@/shared/config/styles/variables';
+
+.movieContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.movieCard {
+  flex-direction: column;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  gap: 20px;
+  width: 700px;
+  background-color: $color-bg-card;
+  min-height: 800px;
+  border-radius: 15px;
+
+}
+
+.movieTitle {
+  font-family: $font-main;
+  color: $color-text-primary;
+  font-size: 40px;
+
+}
+
+.moviePoster {
+  height: 500px;
+  width: 350px;
+  border-radius: 15px;
+
+}
+
+.rating {
+  justify-self: center;
+  color: #ffc107;
+  font-size: 24px;
+
+}
+
+.description {
+  justify-self: center;
+  color: $color-text-secondary;
+  font-size: 20px;
+
+}
+
+.seanceButton {
+
+  width: 250px;
+  border-radius: 10px;
+  height: 72px;
+  color: $color-text-primary;
+  border: none;
+  background-color: $color-text-secondary;
+  font-size: 25px;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  &:hover {
+    background-color: $color-accent-glow;
+  }
+}

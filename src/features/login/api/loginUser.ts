@@ -1,4 +1,4 @@
-import type { LoginResult, LoginFormValues } from "@/features/login/model/types";
+import type { LoginResult, LoginFormValues } from "../model/types";
 
 export async function loginUser(values: LoginFormValues): Promise<LoginResult> {
     try {

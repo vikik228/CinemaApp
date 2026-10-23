@@ -1,4 +1,4 @@
-import type { SeanceMockData } from "@/shared/api/mock/types";
+import type { SeanceMockData } from "@/shared/api";
 
 export interface SeanceStore {
     seances: SeanceMockData[];

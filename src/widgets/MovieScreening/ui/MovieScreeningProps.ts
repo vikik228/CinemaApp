@@ -1,4 +1,4 @@
-import type { MovieMockData } from "@/shared/api/mock/types.ts";
+import type { MovieMockData } from "@/entities/Movie";
 
 export interface MovieScreeningProps {
     movies: MovieMockData[];

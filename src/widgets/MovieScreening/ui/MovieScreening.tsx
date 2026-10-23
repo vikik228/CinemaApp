@@ -1,9 +1,9 @@
-import type {MovieScreeningProps} from "@/widgets/MovieScreening/ui/MovieScreeningProps";
+import type {MovieScreeningProps} from "./MovieScreeningProps";
 import { useSeanceStore } from "@/entities/Seance";
 import { useHallStore } from "@/entities/Hall";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import type {SeanceMockData} from "@/shared/api/mock/types.ts";
+import type {SeanceMockData} from "@/entities/Seance";
 import styles from './MovieScreening.module.scss';
 
 
@@ -86,15 +86,12 @@ export function MovieScreening( { movies } : MovieScreeningProps ) {
                                                 className={styles.seanceButton}
                                                 onClick={() => {
                                                     setSelectedSeance(seance);
-                                                    navigate(`seances/${seance.id}`);
+                                                    navigate(`booking/${seance.id}`);
                                                 }}
                                             >
                                                 {seance.time}
                                                 <br />
                                                 {seance.price} руб
-
-
-
                                             </button>
                                         ))}
                                     </div>

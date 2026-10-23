@@ -1,0 +1,25 @@
+@import '@/shared/config/styles/variables';
+
+.catalogCard {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 300px);
+  background-color: $color-bg-card;
+  width: 1500px;
+  border-radius: 10px;
+  padding: 10px 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+
+  & > * { display: contents}
+}
+.cardContent {
+  display: flex;
+
+  padding: 20px 0;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}

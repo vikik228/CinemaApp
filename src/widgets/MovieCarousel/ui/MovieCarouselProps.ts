@@ -1,4 +1,4 @@
-import type { MovieMockData } from "@/shared/api/mock/types";
+import type { MovieMockData } from "@/entities/Movie";
 
 export interface MovieCarouselProps {
     movies: MovieMockData[];

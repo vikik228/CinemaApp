@@ -1,8 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { MainPage } from "@/pages/main-page";
 import { EventsPage } from "@/pages/events-page";
-import { RegisterPage } from "@/pages/register-page/ui/RegisterPage.tsx";
-import {LoginPage} from "@/pages/login-page/ui/LoginPage.tsx";
+import { RegisterPage } from "@/pages/register-page";
+import { LoginPage } from "@/pages/login-page";
+import { CatalogPage } from "@/pages/catalog-page";
+import { MoviePage } from "@/pages/movie-page";
+import { BookingPage } from "@/pages/booking-page";
 
 const router = createBrowserRouter(
     [
@@ -19,19 +22,22 @@ const router = createBrowserRouter(
             path: "/login",
             element: <LoginPage />
         },
-        /*
+
         {
             path: "/movie/:id",
-            element:
+            element: <MoviePage />
         },
         {
             path: "/booking/:id",
-            element:
+            element: <BookingPage />
         },
-*/
         {
             path: "/events",
             element: <EventsPage />
+        },
+        {
+          path: "/catalog",
+          element: <CatalogPage />
         }
 
     ]

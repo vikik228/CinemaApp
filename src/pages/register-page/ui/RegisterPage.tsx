@@ -1,7 +1,7 @@
 import { Row, Col } from 'antd';
 import {Navbar} from "@/widgets/Navbar";
 import styles from "./RegisterPage.module.scss";
-import {RegisterForm} from "@/features/register/ui/RegisterForm.tsx";
+import {RegisterForm} from "@/features/register";
 
 
 export function RegisterPage() {
