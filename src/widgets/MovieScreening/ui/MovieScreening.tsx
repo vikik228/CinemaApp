@@ -86,7 +86,7 @@ export function MovieScreening( { movies } : MovieScreeningProps ) {
                                                 className={styles.seanceButton}
                                                 onClick={() => {
                                                     setSelectedSeance(seance);
-                                                    navigate(`booking/${seance.id}`);
+                                                    navigate(`/booking/${seance.id}`);
                                                 }}
                                             >
                                                 {seance.time}

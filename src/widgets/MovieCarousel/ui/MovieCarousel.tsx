@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Carousel } from "antd";
 import type { MovieCarouselProps } from "./MovieCarouselProps";
 import styles from "./MovieCarousel.module.scss";
@@ -47,9 +48,9 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
                     <div className={styles.carouselContainer}>
                     <div key={movie.id} className={styles.slideItem}>
                         <div className={styles.cardContent}>
-                            <a href={`/movie/${movie.id}`}>
+                            <Link to={`/movie/${movie.id}`}>
                                 <img src={movie.poster} alt={movie.title} />
-                            </a>
+                            </Link>
 
                             <div className={styles.movieInfo}>
                                 <h3>{movie.title}</h3>

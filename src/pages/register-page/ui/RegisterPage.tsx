@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Row, Col } from 'antd';
 import {Navbar} from "@/widgets/Navbar";
 import styles from "./RegisterPage.module.scss";
@@ -15,7 +16,7 @@ export function RegisterPage() {
             <Col xs={22} sm={14} md={12} lg={10} className={styles.cardMain}>
 
                 <RegisterForm />
-                <div><a href="/login" className={styles.loginLink}>Уже есть аккаунт? Авторизоваться</a></div>
+                <div><Link to="/login" className={styles.loginLink}>Уже есть аккаунт? Авторизоваться</Link></div>
             </Col>
         </Row>
         </div>
