@@ -22,7 +22,7 @@ export function Navbar() {
     }, [pathname]);
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        const mediaQuery = window.matchMedia('(max-width: 1200px)');
 
         const handleChange = () => {
             if (!mediaQuery.matches) {
