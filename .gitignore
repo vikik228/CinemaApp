@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Live Sass Compiler output (Vite compiles SCSS itself)
+src/**/*.module.css
+src/**/*.module.css.map
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

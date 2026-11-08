@@ -1,5 +1,24 @@
 @import '@/shared/config/styles/variables';
 
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: $color-text-primary;
+  cursor: pointer;
+  font-size: 24px;
+
+  @include tablet {
+    display: flex;
+  }
+}
+
 .navbar {
   display: grid;
   align-items: center;
@@ -31,21 +50,10 @@
   flex-wrap: wrap;
 
   @include tablet {
-    display: flex;
-    padding: 10px 10px;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    position: static;
+    display: none;
   }
-  @include mobile {
-    display: flex;
-    padding: 7px 7px;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    position: static;
-  }
+
+
 
   li {
     list-style: none;
@@ -122,6 +130,60 @@
   align-items: center;
   padding-right: 30px;
   justify-content: center;
-  font-style: $font-main;
+  font-family: $font-main;
   font-size: 30px;
+}
+
+.drawer {
+  :global(.ant-drawer-section),
+  :global(.ant-drawer-content),
+  :global(.ant-drawer-header),
+  :global(.ant-drawer-body) {
+    background-color: $color-bg-main;
+  }
+
+  :global(.ant-drawer-header) {
+    border-bottom-color: $color-border;
+  }
+
+  :global(.ant-drawer-title) {
+    color: $color-text-primary;
+    font-family: $font-main;
+  }
+
+  :global(.ant-drawer-close) {
+    color: $color-text-primary;
+  }
+}
+
+.drawerList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-family: $font-main;
+    font-size: 18px;
+    color: $color-text-primary;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-accent-glow;
+    }
+  }
+
+  .username {
+    padding-right: 12px;
+    font-size: 18px;
+  }
 }
