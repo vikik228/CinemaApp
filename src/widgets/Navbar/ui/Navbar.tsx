@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
-import { Drawer } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { Link } from "react-router";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { useAuthStore } from "@/entities/User";
 import styles from "./Navbar.module.scss";
 
@@ -12,96 +11,91 @@ const navItems = [
 ];
 
 export function Navbar() {
-
     const { isAuth, user, logout } = useAuthStore();
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const { pathname } = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    useEffect(() => {
-        setDrawerOpen(false);
-    }, [pathname]);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 1200px)');
-
-        const handleChange = () => {
-            if (!mediaQuery.matches) {
-                setDrawerOpen(false);
-            }
-        };
-
-        mediaQuery.addEventListener('change', handleChange);
-
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, []);
+    const closeMenu = () => setIsMenuOpen(false);
 
     const handleLogout = () => {
         logout();
-        setDrawerOpen(false);
+        closeMenu();
     };
+
+    const authContent = isAuth ? (
+        <div className={styles.auth}>
+            <span className={styles.username}>{user?.login}</span>
+            <button type="button" className={styles.logoutButton} onClick={handleLogout}>
+                Выйти
+            </button>
+        </div>
+    ) : (
+        <Link className={styles.navLink} to="/login" onClick={closeMenu}>
+            Войти
+        </Link>
+    );
+
+    const navLinks = navItems.map((item) => (
+        <li key={item.path}>
+            <Link className={styles.navLink} to={item.path} onClick={closeMenu}>
+                {item.label}
+            </Link>
+        </li>
+    ));
 
     return (
         <nav className={styles.navbar}>
-            <Link to="/" className={styles.logoLink}>
+            <Link to="/" className={styles.logoLink} onClick={closeMenu}>
                 <img className={styles.navLogo} src="/favico.png" alt="cinema logo" />
             </Link>
 
-            <ul className={styles.navbarItem}>
-                {navItems.map((item) => (
-                    <li key={item.path}>
-                        <Link to={item.path}>{item.label}</Link>
-                    </li>
-                ))}
-                <li>
-                    {isAuth ? (
-                        <div className={styles.buttonContainer}>
-                            <span className={styles.username}>{user?.login}</span>
-                            <button onClick={handleLogout} className={styles.logoutButton}>Выйти</button>
-                        </div>
-                    ) : (
-                        <Link to="/login">Войти</Link>
-                    )}
-                </li>
+            <ul className={styles.navList}>
+                {navLinks}
+                <li>{authContent}</li>
             </ul>
 
             <button
+                type="button"
                 className={styles.burger}
-                onClick={() => setDrawerOpen(true)}
-                aria-label="Открыть меню"
-                aria-expanded={drawerOpen}
+                onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+                aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-expanded={isMenuOpen}
+                aria-controls="navbar-menu"
             >
-                <MenuOutlined />
+                {isMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
             </button>
 
-            <Drawer
-                open={drawerOpen}
-                placement="right"
-                title="Меню"
-                onClose={() => setDrawerOpen(false)}
-                rootClassName={styles.drawer}
+            <div
+                id="navbar-menu"
+                className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
+                inert={!isMenuOpen}
             >
-                <ul className={styles.drawerList}>
-                    {navItems.map((item) => (
-                        <li key={item.path}>
-                            <Link to={item.path} onClick={() => setDrawerOpen(false)}>
-                                {item.label}
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
-                        {isAuth ? (
-                            <div className={styles.buttonContainer}>
-                                <span className={styles.username}>{user?.login}</span>
-                                <button onClick={handleLogout} className={styles.logoutButton}>Выйти</button>
-                            </div>
-                        ) : (
-                            <Link to="/login" onClick={() => setDrawerOpen(false)}>Войти</Link>
-                        )}
-                    </li>
-                </ul>
-            </Drawer>
+                <button
+                    type="button"
+                    className={styles.mobileMenuBackdrop}
+                    onClick={closeMenu}
+                    aria-label="Закрыть меню"
+                    tabIndex={-1}
+                />
+
+                <div className={styles.mobileMenuPanel}>
+                    <div className={styles.mobileMenuHeader}>
+                        <span>Меню</span>
+                        <button
+                            type="button"
+                            className={styles.mobileMenuClose}
+                            onClick={closeMenu}
+                            aria-label="Закрыть меню"
+                        >
+                            <CloseOutlined />
+                        </button>
+                    </div>
+
+                    <ul className={styles.mobileMenuList}>
+                        {navLinks}
+                        <li>{authContent}</li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     );
 }

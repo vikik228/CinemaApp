@@ -1,84 +1,25 @@
 @import '@/shared/config/styles/variables';
 
-
-.burger {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  background: none;
-  border: none;
-  color: $color-text-primary;
-  cursor: pointer;
-  font-size: 24px;
-
-  @include desktop {
-    display: flex;
-  }
-}
-
 .navbar {
-  display: grid;
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  grid-template-columns: 150px 1fr 150px;
+  justify-content: space-between;
+  gap: 24px;
   padding: 10px 20px;
   background-color: $color-border;
-  position: relative;
-  @include desktop {
-    display: flex;
-    justify-content: space-between;
-  }
-
-
 }
 
-.navbarItem {
-  display: flex;
-  grid-column: 2;
-  margin: 0;
-  padding: 0;
-  gap: clamp(40px, 8vw, 160px);
-  justify-content: center;
-  list-style: none;
-  flex-wrap: wrap;
+.logoLink {
+  flex-shrink: 0;
+  width: 40px;
+  height: 50px;
+  transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
 
-  @include desktop {
-    display: none;
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 5px $color-accent-glow);
   }
-
-
-
-  li {
-    list-style: none;
-
-    a {
-      font-family: $font-main;
-      font-size: 32px;
-      text-decoration: none;
-      color: $color-text-primary;
-      display: block;
-
-      @include tablet {
-        font-size: 24px;
-      }
-      @include mobile {
-        font-size: 18px;
-      }
-      &:hover {
-        color: $color-accent-hover;
-
-      }
-    }
-
-    transition: ease-in 0.2s;
-    &:hover {
-
-    }
-  }
-
 }
 
 .navLogo {
@@ -88,98 +29,184 @@
   object-fit: contain;
 }
 
-.logoLink {
-  height: 50px;
-  width: 40px;
-  display: block;
-  justify-self: start;
+.navList {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
-  transition: ease-in-out 0.2s;
-  &:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0px 0px 5px $color-accent-glow);
+  @media (max-width: $breakpoint-desktop) {
+    display: none;
   }
 }
 
-.buttonContainer {
+.navLink {
+  display: block;
+  color: $color-text-primary;
+  font-family: $font-main;
+  font-size: 32px;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+}
+
+.auth {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+
+  @media (max-width: $breakpoint-desktop) {
+    display: none;
+  }
+}
+
+.username {
+  font-family: $font-main;
+  font-size: 22px;
+  white-space: nowrap;
 }
 
 .logoutButton {
+  width: 100px;
+  height: 40px;
+  border: 1px solid $color-border;
   border-radius: 10px;
   background-color: $color-text-secondary;
-  border-color: $color-border;
-  height: 40px;
-  width: 100px;
   color: $color-text-primary;
+  font-family: $font-main;
   cursor: pointer;
-  transition: ease-in-out 0.3s;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
   &:hover {
     transform: scale(1.03);
     background-color: $color-accent-glow;
   }
 }
 
-.username {
+.burger {
+  display: none;
   align-items: center;
-  padding-right: 30px;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $color-text-primary;
+  font-size: 24px;
+  cursor: pointer;
+
+  @media (max-width: $breakpoint-desktop) {
+    display: flex;
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
+
+  @media (min-width: #{$breakpoint-desktop + 1px}) {
+    display: none;
+  }
+}
+
+.mobileMenuOpen {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mobileMenuBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.mobileMenuPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(378px, 100%);
+  padding: 20px;
+  overflow-y: auto;
+  background-color: $color-bg-main;
+  border-left: 1px solid $color-border;
+  transform: translateX(100%);
+  transition: transform 0.25s ease-in-out;
+
+  .mobileMenuOpen & {
+    transform: translateX(0);
+  }
+}
+
+.mobileMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $color-border;
+  color: $color-text-primary;
   font-family: $font-main;
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.drawer {
-  :global(.ant-drawer-section),
-  :global(.ant-drawer-content),
-  :global(.ant-drawer-header),
-  :global(.ant-drawer-body) {
-    background-color: $color-bg-main;
-  }
-
-  :global(.ant-drawer-header) {
-    border-bottom-color: $color-border;
-  }
-
-  :global(.ant-drawer-title) {
-    color: $color-text-primary;
-    font-family: $font-main;
-  }
-
-  :global(.ant-drawer-close) {
-    color: $color-text-primary;
-  }
+.mobileMenuClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $color-text-primary;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.drawerList {
+.mobileMenuList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 
-  li {
-    list-style: none;
-  }
-
-  a {
-    display: block;
+  .navLink {
     padding: 12px 8px;
-    border-radius: 8px;
-    font-family: $font-main;
     font-size: 18px;
-    color: $color-text-primary;
-    text-decoration: none;
 
     &:hover {
       color: $color-accent-glow;
     }
   }
 
+  .auth {
+    display: flex;
+    margin-top: 12px;
+    padding: 12px 8px 0;
+    border-top: 1px solid $color-border;
+  }
+
   .username {
-    padding-right: 12px;
     font-size: 18px;
   }
 }
