@@ -1,4 +1,4 @@
-@import '@/shared/config/styles/variables';
+@use '@/shared/config/styles/variables' as *;
 
 .pageWrapper {
   font-family: $font-main;
@@ -32,7 +32,7 @@
 
 .closeText {
   padding: 10px;
-  margin-Left: 310px;
+  justify-self: center;
   @include tablet {
     padding: 0;
     margin: 0;

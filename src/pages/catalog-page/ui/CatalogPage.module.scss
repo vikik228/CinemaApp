@@ -1,17 +1,36 @@
-@import '@/shared/config/styles/variables';
+@use '@/shared/config/styles/variables' as *;
 
 .catalogCard {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(4, 300px);
+  grid-template-columns: repeat(4, minmax(0, 300px));
   background-color: $color-bg-card;
-  width: 1500px;
+  width: 100%;
+  max-width: 1500px;
   border-radius: 10px;
-  padding: 10px 0;
+  padding: 10px;
   height: 100%;
   align-items: center;
   justify-content: center;
 
+  @include desktop {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 300px));
+  }
+
+  @include tablet {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 300px));
+  }
+  @include mobile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include mobile-landscape {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 300px));
+    padding: 10px;
+  }
 
   & > * { display: contents}
 }

@@ -1,4 +1,4 @@
-@import '@/shared/config/styles/variables';
+@use '@/shared/config/styles/variables' as *;
 
 .pageContainer {
   display: flex;

@@ -1,4 +1,4 @@
-@import '@/shared/config/styles/variables';
+@use '@/shared/config/styles/variables' as *;
 
 .screeningContainer {
   position: relative;
@@ -112,8 +112,8 @@
 .dateButtonContainer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   margin-bottom: 16px;
+  justify-content: center;
 
   @include tablet {
     justify-content: center;
